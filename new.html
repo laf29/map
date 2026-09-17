@@ -13,17 +13,23 @@
       body { 
         margin: 0; 
       }
+      #mapCanvasContainer {
+        width: 100%;
+        text-align:center;
+      }
       #mapCanvas {
         display: block;
         margin: 0 auto;
         height: 80vh;
         width: 80vw;.
-        display: inline;
+        display: inline-block;
       }
     </style>
   </head>
   <body style="background-color: #A88E67;">
+    <div id="mapCanvasContainer">
     <canvas id="mapCanvas" style="height: 80vh; width: 80vw;" onmousedown="canvasClicked()">Your browser cannot support this game.</canvas>
+    </div>
     <script>
       const canvas = document.getElementById("mapCanvas");
       const ctx = canvas.getContext("2d");
