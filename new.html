@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Map Generator</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        transform-origin: center;
+      }
+      canvas {
+        background: #234567;
+        display: block;
+        margin: 2 auto;
+        height: 100vh;
+        width: 100vw;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas">Your browser cannot support this game.</canvas>
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      canvas.setAttribute('width', '500');
+      canvas.setAttribute('height', '500');
+      const ctx = canvas.getContext("2d");
+
+     // Variables
+
+      var GridX = 40;
+      var GridY = 90;
+      var density = GridX * GridY;
+      var LandArray = [];
+      var verticesX =[];
+      var verticesY = [];
+      var trueGridX = 500/GridX;// window.innerWidth/GridX;
+      var trueGridY = 500/GridY;
+      var k = 0;
+      var m = 0;
+     
+     // Fill LandArray
+      
+      for (i = 0; i < density; i++) {
+        let randLand = Math.floor(Math.random() * 2);
+        if (randLand == 0) {
+          LandArray[i] = "G";
+        } else {
+          LandArray[i] = "B";
+        };
+      };
+
+     // Quasirandomness
+      
+      for (i = 0; i < density; i++) {
+        n = i + 1;
+        if (n % GridX == 0) {
+          k++;
+          m = 0;
+        };
+        randQX = Math.random() + m;
+        randQY = Math.random() + k;
+        verticesX[i] = randQX*trueGridX;
+        verticesY[i] = randQY*trueGridY;
+        m++;
+      };
+
+
+     // Draw
+
+      function drawQuads(i) {
+        n=i+1;
+        if (n % GridX != 0) {
+          ctx.beginPath();
+          ctx.moveTo(verticesX[i], verticesY[i]);
+          ctx.lineTo(verticesX[i+1], verticesY[i+1]);
+          ctx.lineTo(verticesX[i+GridX+1], verticesY[i+GridX+1]);
+          ctx.lineTo(verticesX[i+GridX], verticesY[i+GridX]);
+          ctx.lineTo(verticesX[i], verticesY[i]);
+          ctx.fill();
+          ctx.closePath();
+        };
+      };
+
+      for (i = 0; i < density - GridX-1; i++) {
+        if (LandArray[i] == "B") {
+          ctx.fillStyle = "#456789";
+        } else if (LandArray[i] == "G") {
+          ctx.fillStyle = "#345678";
+        };
+        drawQuads(i);
+      };
+    </script>
+  </body>
+</html>
