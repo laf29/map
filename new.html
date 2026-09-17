@@ -90,16 +90,13 @@
           ctx.lineTo(verticesX[i], verticesY[i]);
           ctx.fill();
           ctx.closePath();
+          
         };
       };
 
-      for (i = 0; i < density - GridX-1; i++) {
-        if (LandArray[i] == "B") {
-          ctx.fillStyle = "#456789";
-        } else if (LandArray[i] == "G") {
-          ctx.fillStyle = "#345678";
-        };
-        drawQuads(i);
+ctx.fillStyle = "#29e01f";
+      
+      drawQuads(i);
       };
     </script>
   </body>
